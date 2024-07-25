@@ -3,11 +3,10 @@ USE sakila;
 
 --Step 1: Create a View
 --First, create a view that summarizes rental information for each customer. The view should include the customer's ID, name, email address, and total number of rentals (rental_count).
-CREATE VIEW customer_rental_summary
-SELECT c.customer_id, CONCAT(c.first_name, ' ', c.last_name) AS customer_name, c.email, COUNT(r.rental_id) AS total_rental
+CREATE VIEW customer_rental_summary AS
+SELECT c.customer_id, CONCAT(c.first_name, ' ', c.last_name) AS customer_name, c.email, COUNT(r.rental_id) AS rental_count
 FROM customer AS c
-LEFT JOIN rental AS r
-ON c.customer_id = r.customer_id
+LEFT JOIN rental AS r ON c.customer_id = r.customer_id
 GROUP BY c.customer_id, c.first_name, c.last_name, c.email;
 
 SELECT * FROM customer_rental_summary;
